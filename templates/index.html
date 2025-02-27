@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('static/img.jpeg'); /* Change to your image path */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            width: 40%;  /* Increased width */
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.75); /* Lower opacity */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            color: black;
+            position: absolute;
+            top: 70%;
+            left: 5%;  /* Moved to the left */
+            transform: translateY(-50%);
+        }
+
+        h2 {
+    text-align: center;
+    color: black;
+    font-size: 40px; /* Increased size */
+    font-family: 'Poppins', sans-serif; /* Stylish font */
+    font-weight: bold;
+    text-transform: uppercase; /* Makes it more eye-catching */
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3); /* Adds a nice shadow */
+    margin-bottom: 30px; /* Space below the heading */
+}
+
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(36, 36, 36);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Diabetes Prediction System</h2>
+    
+    <div class="container">
+        <form action="/predict" method="post">
+            <label>Pregnancies:</label>
+            <input type="number" name="pregnancies" required>
+        
+            <label>Glucose Level:</label>
+            <input type="number" name="glucose" required>
+        
+            <label>Blood Pressure:</label>
+            <input type="number" name="blood_pressure" required>
+        
+            <label>Skin Thickness:</label>
+            <input type="number" name="skin_thickness" required>
+        
+            <label>Insulin Level:</label>
+            <input type="number" name="insulin" required>
+        
+            <label>BMI:</label>
+            <input type="number" step="0.1" name="bmi" required>
+        
+            <label>Diabetes Pedigree Function:</label>
+            <input type="number" step="0.01" name="diabetes_pedigree" required>
+        
+            <label>Age:</label>
+            <input type="number" name="age" required>
+        
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- 🛠️ Display Result -->
+        {% if prediction %}
+            <div class="result">
+                <h3>Prediction Result:</h3>
+                <p style="font-size: 20px; color: red;">{{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
