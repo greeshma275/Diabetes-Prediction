@@ -1,0 +1,65 @@
+<nav class="navbar">
+    <div class="logo"><i class="fas fa-heartbeat"></i> Diabetes Predictor</div>
+    <ul>
+        <li class="{% if request.endpoint == 'landing' %}active{% endif %}"><a href="{{ url_for('landing') }}">Home</a></li>
+        <li class="{% if request.endpoint == 'about' %}active{% endif %}"><a href="{{ url_for('about') }}">About</a></li>
+        <li class="{% if request.endpoint == 'predict' %}active{% endif %}"><a href="{{ url_for('predict') }}">Predict</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</nav>
+<style>
+.navbar {
+    background: #223a5e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 70px;
+    box-shadow: 0 2px 12px rgba(34,58,94,0.08);
+    border-bottom: 2px solid #1a2940;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.navbar .logo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+.navbar .logo i {
+    margin-right: 10px;
+    color: #fff;
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+.navbar ul li {
+    display: inline-block;
+}
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    border-radius: 22px;
+    transition: background 0.2s, color 0.2s;
+}
+.navbar ul li.active a, .navbar ul li a:hover {
+    background: #f3f1f1;
+    color: #0b0b0b !important;
+}
+@media (max-width: 700px) {
+    .navbar { padding: 0 10px; }
+    .navbar ul { gap: 10px; }
+    .navbar .logo { font-size: 1.2rem; }
+}
+</style> 

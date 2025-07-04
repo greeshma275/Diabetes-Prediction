@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if mode == 'login' %}Login{% else %}Register{% endif %} - Diabetes Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: url('static/bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.75); /* More opacity for contrast */
+            z-index: 0;
+        }
+        .auth-main {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-split {
+            display: flex;
+            width: 900px;
+            max-width: 98vw;
+            min-height: 600px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(8px);
+        }
+        .auth-image {
+            flex: 1.2;
+            background: url('static/auth_side.jpg') center center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(44,62,80,0.55);
+        }
+        .auth-image-caption {
+            position: relative;
+            color: #fff;
+            z-index: 1;
+            padding: 40px 30px;
+            font-size: 1.3rem;
+            font-weight: 500;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .auth-card {
+            flex: 1;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(18px);
+            padding: 50px 40px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 0 30px 30px 0;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.10);
+            position: relative;
+        }
+        .auth-card h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .auth-card p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 0.97rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px 15px 15px 48px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.85);
+            transition: all 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.10);
+        }
+        .form-group i {
+            position: absolute;
+            left: 16px;
+            top: 44px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .form-group:focus-within i {
+            color: #3498db;
+        }
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.10);
+        }
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1f5f8b);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.18);
+        }
+        .auth-switch {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid #e1e8ed;
+        }
+        .auth-switch p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .switch-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .switch-btn:hover {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(46,204,113,0.18);
+        }
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        .flash-message {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .flash-error {
+            background: #fee;
+            color: #c0392b;
+            border: 1px solid #fadbd8;
+        }
+        .flash-success {
+            background: #d5f4e6;
+            color: #27ae60;
+            border: 1px solid #a8e6cf;
+        }
+        @media (max-width: 1100px) {
+            .auth-split { width: 98vw; }
+        }
+        @media (max-width: 900px) {
+            .auth-split { flex-direction: column; min-height: unset; border-radius: 30px; }
+            .auth-image, .auth-card { border-radius: 0; }
+            .auth-image { min-height: 220px; }
+        }
+        @media (max-width: 600px) {
+            .auth-split { width: 100vw; border-radius: 0; }
+            .auth-card { padding: 30px 10px; }
+            .auth-image-caption { font-size: 1.05rem; padding: 20px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-main">
+        <div class="auth-split">
+            <div class="auth-image">
+                <div class="auth-image-caption">
+                    <span style="font-size:2rem; font-weight:700; letter-spacing:1px;">Welcome to Diabetes Predictor</span><br>
+                    <span style="font-size:1.1rem;">Your health, our priority. Predict, prevent, and take control.</span>
+                </div>
+            </div>
+            <div class="auth-card">
+                <h2>{% if mode == 'login' %}Sign In{% else %}Create Account{% endif %}</h2>
+                <p>{% if mode == 'login' %}Access your dashboard and start predicting diabetes risk.{% else %}Register to use our advanced diabetes prediction system.{% endif %}</p>
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash-message flash-{{ 'error' if category == 'error' else 'success' }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% if mode == 'login' %}
+                    <!-- Login Form -->
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+                    </form>
+                    <div class="auth-switch">
+                        <p>Don't have an account?</p>
+                        <a href="{{ url_for('register') }}" class="switch-btn">
+                            <i class="fas fa-user-plus"></i> Register Now
+                        </a>
+                    </div>
+                {% else %}
+                    <!-- Register Form -->
+                    <form method="POST" action="{{ url_for('register') }}" id="registerForm">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password</label>
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirm_password" name="confirm_password" required>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                    <div class="auth-switch">
+                        <p>Already have an account?</p>
+                        <a href="{{ url_for('login') }}" class="switch-btn">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

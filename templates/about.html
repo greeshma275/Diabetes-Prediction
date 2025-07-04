@@ -1,0 +1,261 @@
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Diabetes Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f6f8fa; margin: 0; padding: 0; }
+        .about-intro {
+            background: #dee9f5;
+            padding: 0;
+        }
+        .about-intro-flex {
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            width: 100vw;
+            max-width: none;
+            margin: 0;
+            min-height: 320px;
+        }
+        .about-intro-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            padding: 60px 5vw 60px 7vw;
+            min-width: 0;
+        }
+        .about-intro-text h1 {
+            color: #223a5e;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .about-intro-text p {
+            color: #444;
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0;
+        }
+        .about-intro-img {
+            flex: 1;
+            display: flex;
+            align-items: stretch;
+            justify-content: flex-end;
+            min-width: 0;
+        }
+        .about-intro-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 0 0 0;
+            box-shadow: none;
+            min-width: 0;
+            max-width: none;
+            max-height: none;
+        }
+        .about-features-row {
+            background: #f0f4fa;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px 0 30px 0;
+        }
+        .about-feature-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(52,152,219,0.07);
+            display: flex;
+            align-items: center;
+            max-width: 420px;
+            min-width: 320px;
+            padding: 28px 24px;
+            gap: 22px;
+            flex: 1 1 320px;
+        }
+        .about-feature-icon {
+            background: #eaf6fb;
+            color: #223a5e;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .about-feature-content h2 {
+            font-size: 1.15rem;
+            color: #223a5e;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+        .about-feature-content p {
+            color: #444;
+            font-size: 1rem;
+            margin: 0;
+        }
+        .about-stepper-section {
+            background: #fff;
+            padding: 50px 0 30px 0;
+        }
+        .about-stepper-title {
+            text-align: center;
+            color: #223a5e;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .about-stepper {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .about-step {
+            background: #f0f4fa;
+            border-radius: 14px;
+            padding: 28px 22px;
+            min-width: 220px;
+            max-width: 260px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(52,152,219,0.06);
+        }
+        .about-step .step-icon {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        .about-step .step-title {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #223a5e;
+            margin-bottom: 7px;
+        }
+        .about-step .step-desc {
+            color: #444;
+            font-size: 0.98rem;
+        }
+        .about-quote-section {
+            background: #f0f4fa;
+            padding: 50px 0 40px 0;
+            text-align: center;
+        }
+        .about-quote {
+            font-size: 1.25rem;
+            color: #223a5e;
+            font-style: italic;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .about-quote-author {
+            color: #3498db;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        @media (max-width: 900px) {
+            .about-features-row, .about-stepper { flex-direction: column; align-items: center; gap: 24px; }
+            .about-feature-card { min-width: 0; width: 90vw; }
+            .about-step { min-width: 0; width: 90vw; }
+            .about-intro-flex { flex-direction: column; min-height: unset; width: 100vw; }
+            .about-intro-text { text-align: center; padding: 40px 5vw 20px 5vw; }
+            .about-intro-img { align-items: center; justify-content: center; }
+            .about-intro-img img { max-width: 90vw; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 4px 18px rgba(52,152,219,0.10); }
+        }
+        .footer {
+            background: #223a5e;
+            color: #fff;
+            text-align: center;
+            padding: 24px 0 18px 0;
+            font-size: 1rem;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <section class="about-intro">
+        <div class="about-intro-flex">
+            <div class="about-intro-text">
+                <h1>Diabetes Predictor</h1>
+                <p>
+                    Diabetes Predictor is dedicated to empowering you with the knowledge, technology, and support you need for a healthier future. Our mission is to make advanced health technology accessible to everyone, helping people live healthier, longer lives through early detection and prevention.
+                </p>
+            </div>
+            <div class="about-intro-img">
+                <img src="static/about_hero.jpg" alt="About Diabetes Predictor" />
+            </div>
+        </div>
+    </section>
+    <section class="about-features-row">
+        <div class="about-feature-card">
+            <div class="about-feature-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="about-feature-content">
+                <h2>Why Diabetes Prediction Matters</h2>
+                <p>Early detection can help prevent complications and improve outcomes. Personalized risk assessment enables proactive lifestyle changes. Accessible tools make health management easier for everyone.</p>
+            </div>
+        </div>
+        <div class="about-feature-card">
+            <div class="about-feature-icon"><i class="fas fa-brain"></i></div>
+            <div class="about-feature-content">
+                <h2>How Our App Works</h2>
+                <p>Our system uses a machine learning model trained on real medical data. Enter your health metrics and get instant, actionable predictions and tips.</p>
+            </div>
+        </div>
+    </section>
+    <section class="about-features-row">
+        <div class="about-feature-card">
+            <div class="about-feature-icon"><i class="fas fa-users"></i></div>
+            <div class="about-feature-content">
+                <h2>Community & Support</h2>
+                <p>Connect with others, share experiences, and get support from a community focused on healthy living and diabetes prevention.</p>
+            </div>
+        </div>
+        <div class="about-feature-card">
+            <div class="about-feature-icon"><i class="fas fa-user-md"></i></div>
+            <div class="about-feature-content">
+                <h2>Expert Guidance</h2>
+                <p>Access tips and resources from healthcare professionals to help you make informed decisions about your health.</p>
+            </div>
+        </div>
+    </section>
+    <section class="about-stepper-section">
+        <div class="about-stepper-title">How It Works</div>
+        <div class="about-stepper">
+            <div class="about-step">
+                <div class="step-icon"><i class="fas fa-user-edit"></i></div>
+                <div class="step-title">Enter Your Details</div>
+                <div class="step-desc">Fill in your health metrics such as age, glucose, BMI, and more.</div>
+            </div>
+            <div class="about-step">
+                <div class="step-icon"><i class="fas fa-magic"></i></div>
+                <div class="step-title">AI Analysis</div>
+                <div class="step-desc">Our machine learning model analyzes your data instantly.</div>
+            </div>
+            <div class="about-step">
+                <div class="step-icon"><i class="fas fa-chart-pie"></i></div>
+                <div class="step-title">Get Your Result</div>
+                <div class="step-desc">Receive a clear prediction and actionable health tips.</div>
+            </div>
+            <div class="about-step">
+                <div class="step-icon"><i class="fas fa-hands-helping"></i></div>
+                <div class="step-title">Ongoing Support</div>
+                <div class="step-desc">Access resources and community support for your journey.</div>
+            </div>
+        </div>
+    </section>
+    <section class="about-quote-section" style="background: #eaf6fb;">
+        <div class="about-quote"><strong>"The greatest wealth is health. Our mission is to help you protect it."</strong></div>
+    </section>
+    <footer class="footer">
+        &copy; {{ 2024 }} Diabetes Predictor. All rights reserved.
+    </footer>
+</body>
+</html> 
